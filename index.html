@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="is-loading">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#041a21" />
+  <meta name="description" content="深蓝絮语 · 一片可以呼吸的海底世界。跟随光影、水母与鲸鱼，慢慢沉入安静。" />
+  <title>深蓝絮语 · Abyssal Whispers</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop stop-color='%23d9fff4'/%3E%3Cstop offset='1' stop-color='%23117d83'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='%23041a21' stroke='%23b8f5e8' stroke-opacity='.55'/%3E%3Cpath d='M17 35c4-6 8-6 12 0s8 6 12 0 7-5 10-1' fill='none' stroke='url(%23g)' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='24' cy='23' r='2' fill='%23f4e3bf'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-theme="dawn">
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <span class="loader__mark">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-opacity=".28" />
+          <path d="M11 27c4.5-6 8.5-6 13 0s8.5 6 13 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          <path d="M15 33c3-3.5 6-3.5 9 0s6 3.5 9 0" stroke="currentColor" stroke-opacity=".55" stroke-width="1.2" stroke-linecap="round" />
+          <circle cx="19" cy="18" r="1.6" fill="currentColor" />
+        </svg>
+      </span>
+      <p>正在潜入深蓝</p>
+    </div>
+  </div>
+
+  <div class="world" id="world">
+    <canvas class="ocean" id="ocean" aria-hidden="true"></canvas>
+
+    <div class="atmosphere" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <button class="brand" id="brandBtn" type="button" aria-label="回到开篇" title="回到开篇">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-opacity=".26" />
+            <path d="M11 27c4.5-6 8.5-6 13 0s8.5 6 13 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+            <path d="M15 33c3-3.5 6-3.5 9 0s6 3.5 9 0" stroke="currentColor" stroke-opacity=".48" stroke-width="1.2" stroke-linecap="round" />
+            <circle cx="19" cy="18" r="1.6" fill="currentColor" />
+          </svg>
+        </span>
+        <span class="brand__text">
+          <strong>深蓝絮语</strong>
+          <small>ABYSSAL WHISPERS</small>
+        </span>
+      </button>
+
+      <div class="topbar__right">
+        <div class="theme-switcher" role="group" aria-label="切换海底光景">
+          <span class="theme-switcher__label">光景</span>
+          <button class="theme-option is-active" type="button" data-theme="dawn" aria-pressed="true" aria-label="晨汐光景">
+            <i class="theme-option__dot" aria-hidden="true"></i><span>晨汐</span>
+          </button>
+          <button class="theme-option" type="button" data-theme="moon" aria-pressed="false" aria-label="月潮光景">
+            <i class="theme-option__dot" aria-hidden="true"></i><span>月潮</span>
+          </button>
+          <button class="theme-option" type="button" data-theme="abyss" aria-pressed="false" aria-label="星海光景">
+            <i class="theme-option__dot" aria-hidden="true"></i><span>星海</span>
+          </button>
+        </div>
+
+        <button class="sound" id="soundToggle" type="button" aria-pressed="false" aria-label="开启环境声音">
+          <span class="sound-icon" aria-hidden="true">
+            <svg viewBox="0 0 22 20" fill="none">
+              <path d="M3.5 7.4h3.1L11 4.1v11.8L6.6 12.6H3.5z" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round" />
+              <path class="sound-wave sound-wave--one" d="M14.2 7.4c.75.72 1.15 1.63 1.15 2.6 0 .98-.4 1.9-1.15 2.62" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" />
+              <path class="sound-wave sound-wave--two" d="M16.8 5.2c1.22 1.22 1.83 2.82 1.83 4.8 0 1.99-.61 3.59-1.83 4.8" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="sound__label">声音</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="hero" id="hero">
+      <div class="hero__eyebrow">
+        <span class="hero__eyebrow-line" aria-hidden="true"></span>
+        A QUIET PLACE BELOW&nbsp;&nbsp;·&nbsp;&nbsp;海底疗愈所
+      </div>
+
+      <h1 class="hero__title">
+        <span>把心事，</span>
+        <span>交给<em>深蓝</em>。</span>
+      </h1>
+
+      <p class="hero__copy">光会替你带走它们。<br />像潮汐一样，轻轻地来，轻轻地去。</p>
+
+      <div class="hero__actions">
+        <button class="btn btn--primary" id="enterBtn" type="button">
+          <span>潜入深海</span>
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="none">
+              <path d="M10 4v11M5.5 10.5 10 15l4.5-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </button>
+        <button class="btn btn--ghost" id="breatheBtn" type="button">
+          <span class="breathe-icon" aria-hidden="true"><i></i></span>
+          <span>静心呼吸</span>
+        </button>
+      </div>
+
+      <div class="hero__meta">
+        <span>深度 &nbsp;−28 m</span>
+        <i aria-hidden="true"></i>
+        <span>潮汐 &nbsp;缓慢</span>
+      </div>
+    </main>
+
+    <aside class="scene-note" aria-hidden="true">
+      <span class="scene-note__line"></span>
+      <span>跟随光，慢慢下沉</span>
+    </aside>
+
+    <div class="bottom-ui">
+      <div class="interaction-hint" id="interactionHint">
+        <span class="hint-ring" aria-hidden="true"><i></i></span>
+        <span class="hint-copy">
+          <span class="hint-desktop"><b>移动</b>，唤醒微光&nbsp;&nbsp;·&nbsp;&nbsp;<b>轻点</b>，泛起涟漪</span>
+          <span class="hint-touch"><b>轻触</b>，唤醒海底的微光</span>
+        </span>
+      </div>
+      <div class="bottom-tools">
+        <button class="mini-breathe" id="miniBreatheBtn" type="button" aria-label="进入静心呼吸">
+          <span class="breathe-icon" aria-hidden="true"><i></i></span>
+          <span class="mini-breathe__label">静心</span>
+        </button>
+        <div class="live-status" aria-hidden="true">
+          <span class="live-status__dot"></span>
+          <span>潮汐正在呼吸</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="breathe-overlay" id="breatheOverlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="breatheTitle">
+      <button class="overlay-close" id="closeBreathe" type="button" aria-label="结束呼吸练习">
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" /></svg>
+      </button>
+
+      <div class="breathe-panel">
+        <p class="breathe-kicker">跟随海潮&nbsp;&nbsp;·&nbsp;&nbsp;4 / 2 / 6</p>
+        <h2 id="breatheTitle">让呼吸，慢下来。</h2>
+
+        <div class="breathe-stage">
+          <span class="breathe-ring breathe-ring--outer" aria-hidden="true"></span>
+          <span class="breathe-ring breathe-ring--middle" aria-hidden="true"></span>
+          <div class="breathe-progress" id="breatheProgress" aria-hidden="true"></div>
+          <div class="breathe-orb" id="breatheOrb" aria-hidden="true"><span></span></div>
+          <div class="breathe-readout">
+            <p class="breathe-phase" id="breathePhase">吸气</p>
+            <p class="breathe-count" id="breatheCount">4</p>
+          </div>
+        </div>
+
+        <p class="breathe-hint">吸气 4 秒&nbsp;&nbsp;·&nbsp;&nbsp;屏息 2 秒&nbsp;&nbsp;·&nbsp;&nbsp;呼气 6 秒</p>
+        <button class="btn btn--ghost breathe-exit" id="exitBreatheBtn" type="button">回到海洋</button>
+      </div>
+    </section>
+
+    <p class="sr-only" id="liveRegion" aria-live="polite"></p>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
