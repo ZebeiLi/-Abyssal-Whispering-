@@ -2,6 +2,9 @@
 
 一片可以呼吸、可以触碰的海底世界。
 
+<img width="1440" height="900" alt="preview" src="https://github.com/user-attachments/assets/edbad56e-2c71-497d-afa4-0ff0126638a7" />
+
+
 ## 互动方式
 
 - **移动鼠标 / 轻触水面**：唤醒浮游微光，鱼群会羞涩地散开。
