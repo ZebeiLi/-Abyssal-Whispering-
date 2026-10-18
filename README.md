@@ -4,6 +4,7 @@
 
 <img width="1440" height="900" alt="preview" src="https://github.com/user-attachments/assets/edbad56e-2c71-497d-afa4-0ff0126638a7" />
 
+## 网页直达 https://zebeili.github.io/-Abyssal-Whispering-/
 
 ## 互动方式
 
